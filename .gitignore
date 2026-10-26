@@ -1,0 +1,27 @@
+# Generated build artifacts
+build/
+ 
+# Operating system files
+Thumbs.db
+.DS_Store
+ 
+# VS Code user settings
+.vscode/settings.json
+.vscode/tasks.json
+ 
+# Python
+__pycache__/
+*.pyc
+ 
+# Ruby
+.bundle/
+ 
+# Temporary files
+*.tmp
+*.bak
+
+# Log files
+tracker.log
+
+# CCSDS source document (copyrighted, kept local only)
+*.pdf
