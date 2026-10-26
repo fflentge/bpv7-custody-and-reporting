@@ -65,6 +65,10 @@ Markdown (.md)
 kramdown-rfc
       │
       ▼
+xml2rfc --v2v3 (convert deprecated v2 <list> elements,
+                 strip <?line?> processing instructions)
+      │
+      ▼
 RFCXML (.xml)
       │
       ▼
@@ -73,6 +77,15 @@ xml2rfc
       ├── TXT rendering
       └── HTML rendering
 ```
+
+The build post-processes the kramdown-rfc output with xml2rfc's v2v3
+converter and strips the `<?line?>` source-location processing
+instructions. This removes the deprecated RFCXML v2 `<list>` elements
+and line-number PIs, so the generated XML passes the Datatracker's
+idnits3 check without warnings. Unlike `xml2rfc --preptool`, the v2v3
+converter adds no publication artifacts (prepTime attribute,
+`<boilerplate>` element, xref format attributes) that idnits3 rejects
+in draft submissions; the rendered text output is unchanged.
 
 Make all substantive, editorial, reference, and CDDL changes in the
 Markdown files. Do not edit files under `build/` manually because the
