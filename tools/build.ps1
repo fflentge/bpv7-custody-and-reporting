@@ -32,7 +32,6 @@ if ($Clean -and (Test-Path $BuildDir)) {
 
 foreach ($Draft in $Drafts) {
     $Markdown = Join-Path $DraftDir "$Draft.md"
-    $RawName = "$Draft-raw"
     $Xml = Join-Path $XmlDir "$Draft.xml"
     $Text = Join-Path $TxtDir "$Draft.txt"
     $Html = Join-Path $HtmlDir "$Draft.html"
@@ -42,19 +41,10 @@ foreach ($Draft in $Drafts) {
     }
 
     Write-Host "Generating RFCXML: $Draft" -ForegroundColor Cyan
-    $RawXml = Join-Path $XmlDir "$RawName.xml"
-    & kramdown-rfc --v3 $Markdown | Set-Content -Path $RawXml -Encoding utf8
+    & kramdown-rfc --v3 $Markdown | Set-Content -Path $Xml -Encoding utf8
     if ($LASTEXITCODE -ne 0) {
         throw "kramdown-rfc failed for $Markdown"
     }
-
-    # Normalize to clean RFCXML v3 (converts deprecated <list> elements,
-    # removes <?line?> processing instructions) for submission.
-    & xml2rfc --preptool $RawXml --out $Xml
-    if ($LASTEXITCODE -ne 0) {
-        throw "xml2rfc preptool failed for $RawXml"
-    }
-    Remove-Item $RawXml -Force
 
     Write-Host "Generating text: $Draft" -ForegroundColor Cyan
     & xml2rfc $Xml --text --out $Text

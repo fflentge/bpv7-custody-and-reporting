@@ -65,9 +65,6 @@ Markdown (.md)
 kramdown-rfc
       │
       ▼
-xml2rfc preptool (RFCXML v3 normalization)
-      │
-      ▼
 RFCXML (.xml)
       │
       ▼
@@ -76,12 +73,6 @@ xml2rfc
       ├── TXT rendering
       └── HTML rendering
 ```
-
-The build normalizes the kramdown-rfc output with xml2rfc's preptool
-before rendering. This converts deprecated RFCXML v2 elements (such as
-`<list>`) to RFCXML v3 equivalents and removes `<?line?>` processing
-instructions, so the generated XML keeps the Datatracker's idnits3
-check free of warnings.
 
 Make all substantive, editorial, reference, and CDDL changes in the
 Markdown files. Do not edit files under `build/` manually because the
